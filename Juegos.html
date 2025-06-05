@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pausa Visual - Juegos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('Imagenes/Fondopose.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+      text-align: center;
+    }
+
+    .section-container {
+      max-width: 1000px;
+      padding: 7rem 1rem 2rem 1rem;
+      width: 100%;
+    }
+
+    h1.title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #0081e2;
+      margin-bottom: 0.2rem;
+    }
+
+    p.subtitle {
+      font-size: 1.2rem;
+      color: #444;
+      margin-top: 0;
+      margin-bottom: 3rem;
+    }
+
+    .break-zone {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card {
+      width: 220px;
+      height: 300px;
+      border-radius: 15px;
+      background: white;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem 0.8rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #222;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 139, 248, 0.5);
+      transform: translateY(-5px);
+    }
+
+    .card-details {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      justify-content: flex-start;
+    }
+
+    .image-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 15px;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: #f0f0f0;
+      margin-top: 1rem;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .text-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #274c96;
+      margin: 0.3rem 0 0.5rem 0;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.2em;
+      color: #444;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    .skip-button {
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skip-button:hover {
+      background-color: #e63a3c;
+    }
+
+    .select-counter {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.3rem 0.8rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: white;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    #iframeContainer {
+      width: 100%;
+      max-width: 1660px;
+      height: 740px;
+      margin: -15rem auto 1rem auto;
+      display: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #gameIframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 15px;
+    }
+
+    #restTimer {
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    user-select: none;
+  }
+
+    @media (max-width: 600px) {
+      .break-zone {
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 280px;
+      }
+
+      .card {
+        width: 100%;
+        height: auto;
+      }
+
+      .buttons-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      #iframeContainer {
+        height: 400px;
+        margin-top: -8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="section-container">
+    <h1 class="title">¡Elegí un juego!</h1>
+    <p class="subtitle">Divertite un rato con alguno de estos clásicos</p>
+
+    <div class="break-zone">
+      <div class="card" onclick="chooseOption(0)">
+        <div class="card-details">
+          <div class="image-wrapper">
+            <img src="Imagenes/FluidoGame.png" alt="Juego 1" />
+          </div>
+          <h2 class="text-title">Humo mágico</h2>
+          <p>Crea formas espectaculares con sonidos relajantes.</p>
+        </div>
+      </div>
+      <div class="card" onclick="chooseOption(1)">
+        <div class="card-details">
+          <div class="image-wrapper">
+            <img src="Imagenes/strech.png" alt="Juego 2" />
+          </div>
+          <h2 class="text-title">Sudoku</h2>
+          <p>Estimula tu mente y concentración con un breve puzzle.</p>
+        </div>
+      </div>
+      <div class="card" onclick="chooseOption(2)">
+        <div class="card-details">
+          <div class="image-wrapper">
+            <img src="Imagenes/Respirar.png" alt="Juego 3" />
+          </div>
+          <h2 class="text-title">Buscaminas</h2>
+          <p>Pasa el rato con este clásico de clásicos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons-container" id="buttonsContainer">
+      <button class="skip-button" id="skipBtn" onclick="skipRest()">Omitir descanso</button>
+      <div id="selectCounter" class="select-counter">Auto-Seleccion en: 10</div>
+    </div>
+  </div>
+
+  <div id="iframeContainer">
+    <iframe id="gameIframe" src=""></iframe>
+    <div id="restTimer" style="display:none;">Tiempo de descanso: 20</div>
+  </div>
+
+  <script>
+    let selectCountdown = 10;
+    let restCountdown = 20;
+    let selectInterval;
+    let restInterval;
+    let hasChosen = false;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      startSelectTimer();
+    });
+
+    function startSelectTimer() {
+      const selectCounterEl = document.getElementById('selectCounter');
+      selectCounterEl.textContent = `Auto-Seleccion en: ${selectCountdown}`;
+      selectInterval = setInterval(() => {
+        selectCountdown--;
+        if (selectCountdown <= 0) {
+          clearInterval(selectInterval);
+          chooseOption(0);
+        } else {
+          selectCounterEl.textContent = `Auto-Seleccion en: ${selectCountdown}`;
+        }
+      }, 1000);
+    }
+
+    function startRestTimer() {
+      const restTimerEl = document.getElementById('restTimer');
+      restTimerEl.style.display = 'block';
+      restTimerEl.textContent = `Tiempo de descanso: ${restCountdown}`;
+      restInterval = setInterval(() => {
+        restCountdown--;
+        if (restCountdown <= 0) {
+          clearInterval(restInterval);
+          window.location.href = 'https://www.google.com';
+        } else {
+          restTimerEl.textContent = `Tiempo de descanso: ${restCountdown}`;
+        }
+      }, 1000);
+    }
+
+    function chooseOption(index) {
+      if (hasChosen) return;
+      hasChosen = true;
+
+      // Detener timer selección
+      clearInterval(selectInterval);
+
+      // Ocultar listado y botones
+      document.querySelector('.break-zone').style.display = 'none';
+      document.getElementById('buttonsContainer').style.display = 'none';
+
+      // Mostrar iframe y contador de descanso
+      const iframeContainer = document.getElementById('iframeContainer');
+      const iframe = document.getElementById('gameIframe');
+      iframeContainer.style.display = 'flex';
+
+      // Resetear y comenzar el descanso en 20 segundos
+      restCountdown = 20;
+
+      // Según la opción, cargar la url del iframe o redirigir directo
+      if (index === 0) {
+        iframe.src = 'Fluido.html'; // ejemplo, tu url para opción 0
+        startRestTimer();
+      } else if (index === 1) {
+        // Para opción 1 redirigimos directo a Google (o cambiar la url si querés)
+        window.location.href = 'https://www.google.com';
+      } else if (index === 2) {
+        // Para opción 2 redirigimos directo a Google (o cambiar la url si querés)
+        window.location.href = 'https://www.google.com';
+      }
+    }
+
+    function skipRest() {
+      clearInterval(selectInterval);
+      window.location.href = 'https://www.google.com';
+    }
+  </script>
+</body>
+</html>

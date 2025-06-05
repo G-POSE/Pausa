@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pausa Visual</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('Imagenes/Fondopose.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+      text-align: center;
+    }
+
+    .section-container {
+      max-width: 1000px;
+      padding: 7rem 1rem 2rem 1rem;
+      width: 100%;
+    }
+
+    h1.title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #0081e2;
+      margin-bottom: 0.2rem;
+    }
+
+    p.subtitle {
+      font-size: 1.2rem;
+      color: #444;
+      margin-top: 0;
+      margin-bottom: 3rem;
+    }
+
+    .break-zone {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card {
+      width: 220px;
+      height: 300px;
+      border-radius: 15px;
+      background: white; /* fondo blanco */
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem 0.8rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #222;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 139, 248, 0.5);
+      transform: translateY(-5px);
+    }
+
+    .card-details {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      justify-content: flex-start;
+    }
+
+    .image-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 15px;
+      user-select: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      /* agrego un fondo gris claro para destacar la imagen */
+      background: #f0f0f0;
+      margin-top: 1rem;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Esta es la clave */
+      border-radius: 15px; /* Para que coincida con el wrapper */
+    }
+
+    .text-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #274c96;
+      margin: 0.3rem 0 0.5rem 0;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.2em;
+      color: #444;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .skip-button {
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease;
+      min-width: 140px;
+    }
+
+    .skip-button:hover {
+      background-color: #e63a3c;
+    }
+
+    .select-counter {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.3rem 0.8rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: white;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+
+    @media (max-width: 600px) {
+      .break-zone {
+        flex-direction: column;
+        gap: 1.5rem;
+        max-width: 280px;
+      }
+
+      .card {
+        width: 100%;
+        height: auto;
+      }
+
+      .buttons-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="section-container">
+    <h1 class="title">¡Tomate un descanso activo!</h1>
+    <p class="subtitle">Elegí alguna de estas tres opciones para disfrutar de un descanso placentero</p>
+
+    <div class="break-zone">
+      <div class="card" onclick="chooseOption(0)">
+        <div class="card-details">
+          <div class="image-wrapper">
+            <img src="Imagenes/Naturaleza.png" alt="Videos Relajantes" />
+          </div>
+          <h2 class="text-title">Naturaleza</h2>
+          <p>Disfrutá de hermosos paisajes paradisiacos.</p>
+        </div>
+      </div>
+      <div class="card" onclick="chooseOption(1)">
+        <div class="card-details">
+          <div class="image-wrapper">
+            <img src="Imagenes/Espacio.png" alt="Actividades" />
+          </div>
+          <h2 class="text-title">Espacio</h2>
+          <p>Descubri las infinidades del espacio para un descanso cosmico</p>
+        </div>
+      </div>
+      <div class="card" onclick="chooseOption(2)">
+        <div class="card-details">
+          <div class="image-wrapper">
+            <img src="Imagenes/Animales.png" alt="Juegos" />
+          </div>
+          <h2 class="text-title">Animales</h2>
+          <p>Los videos mas tiernos con los animales mas bonitos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons-container">
+        <button class="skip-button" onclick="window.location.href='https://www.google.com'">Omitir descanso</button>
+        <div id="selectCounter" class="select-counter">Auto-Seleccion en: 10</div>
+      </div>
+    </div>
+    <div id="videoContainer" style="display: none; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; margin-top: -8rem;">
+      <video id="relaxVideo" width="1280" height="720" controls autoplay style="border-radius: 15px; max-width: 100%; box-shadow: 0 0 20px rgba(0,0,0,0.4); margin-top: 1rem;">
+        <source id="videoSource" src="" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+      </video>
+      <div id="descansoTimer" style="margin-top: 1rem; font-size: 1.4rem; color: white; background: rgba(0, 0, 0, 0.6); padding: 0.6rem 1.2rem; border-radius: 10px;">
+        Tiempo de descanso: 20
+      </div>
+    </div>
+
+  <script>
+    let selectCountdown = 10;
+    let selectInterval;
+    let hasChosen = false;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      startSelectionTimer();
+    });
+
+    function startSelectionTimer() {
+      const selectCounterEl = document.getElementById('selectCounter');
+      selectCounterEl.textContent = `Auto-Seleccion en: ${selectCountdown}`;
+      selectInterval = setInterval(() => {
+        selectCountdown--;
+        if (selectCountdown <= 0) {
+          clearInterval(selectInterval);
+          chooseOption(0);
+        } else {
+          selectCounterEl.textContent = `Auto-Seleccion en: ${selectCountdown}`;
+        }
+      }, 1000);
+    }
+
+    function chooseOption(index) {
+    if (hasChosen) return;
+    hasChosen = true;
+    clearInterval(selectInterval);
+
+    const videoSources = [
+      'Videos/VideoRelajante1.mp4',
+      'Videos/VideoRelajante2.mp4',
+      'Videos/VideoRelajante3.mp4'
+    ];
+
+    // Ocultar todo lo anterior
+    document.querySelector('.break-zone').style.display = 'none';
+    document.querySelector('.buttons-container').style.display = 'none';
+    document.querySelector('.title').style.display = 'none';
+    document.querySelector('.subtitle').style.display = 'none';
+
+    // Mostrar el video
+    const videoContainer = document.getElementById('videoContainer');
+    const videoEl = document.getElementById('relaxVideo');
+    const sourceEl = document.getElementById('videoSource');
+    sourceEl.src = videoSources[index];
+    videoEl.load(); // Recargar video
+    videoContainer.style.display = 'flex';
+
+    startDescansoTimer();
+  }
+  function startDescansoTimer() {
+  let tiempo = 20;
+  const timerEl = document.getElementById('descansoTimer');
+  timerEl.textContent = `Tiempo de descanso: ${tiempo}`;
+  
+  const descansoInterval = setInterval(() => {
+    tiempo--;
+    timerEl.textContent = `Tiempo de descanso: ${tiempo}`;
+    if (tiempo <= 0) {
+      clearInterval(descansoInterval);
+      window.location.href = 'https://www.google.com';
+    }
+  }, 1000);
+  }
+  </script>
+</body>
+</html>
